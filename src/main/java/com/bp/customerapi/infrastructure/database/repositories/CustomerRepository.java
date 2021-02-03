@@ -17,6 +17,21 @@ public class CustomerRepository implements ICustomerRespository {
     private final MongoJPARespository mongoJPARespository;
 
     @Override
+    public void save(Customer customer) {
+
+    }
+
+    @Override
+    public void update(Customer customer) {
+
+    }
+
+    @Override
+    public void delete(Customer customer) {
+
+    }
+
+    @Override
     public Optional<Customer> findFirstCustomerByCPF(String cpf) {
         return mongoJPARespository.findFirstByCpf(cpf);
     }

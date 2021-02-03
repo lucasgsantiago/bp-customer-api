@@ -24,4 +24,9 @@ public class Customer implements Serializable {
         this.cpf = cpf;
         this.address = address;
     }
+
+    public void update(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 }
