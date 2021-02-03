@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: customer-api
+  data:
+    mongodb:
+      uri: mongodb://db-mongo:27017/customersdb
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false

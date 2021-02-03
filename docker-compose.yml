@@ -1,0 +1,33 @@
+version: "3.4"
+services:
+
+  db-mongo:
+    image: mongo:4.0
+    container_name: "db-mongo"
+    ports:
+      - 27017:27017
+    networks:
+      - backend-network
+    command: --smallfiles
+
+  customer-api:
+    image: customer-api
+    container_name: "customer-api"
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /customer-api
+    environment:
+      TZ: America/Sao_Paulo
+    ports:
+      - "8080:8080"
+    command: mvn spring-boot:run
+    depends_on:
+      - db-mongo
+    networks:
+      - backend-network
+      
+networks:
+  backend-network:
+    driver: bridge
