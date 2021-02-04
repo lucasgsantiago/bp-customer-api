@@ -11,15 +11,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdateCustomerCommand {
 
-    public String id = UUID.randomUUID().toString();
+    public String id;
 
     @NotNull
     @Size(max = 60)
     public String name;
-
-    @NotNull
-    @Size(min = 11, max = 11)
-    public String cpf;
 
     @NotNull
     @Size(min = 10, max = 254)

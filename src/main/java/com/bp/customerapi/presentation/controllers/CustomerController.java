@@ -64,7 +64,7 @@ public class CustomerController implements IClustomerControllerDocs {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @CacheEvict(value = RESOURCE, allEntries = true)
-    public ResponseEntity<?> createCustomer(@Valid @RequestBody CreateCustomerCommand command) throws CustomerAlreadyRegisteredException {
+    public ResponseEntity<SuccessResult> createCustomer(@Valid @RequestBody CreateCustomerCommand command) throws CustomerAlreadyRegisteredException {
         service.createCustumer(command);
         URI locationUri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/").path(command.id).build().toUri();
         return ResponseEntity.created(locationUri).body(new SuccessResult(command.id,locationUri));

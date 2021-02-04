@@ -2,14 +2,18 @@ package com.bp.customerapi.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -18,6 +22,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Customer implements Serializable {
 
     @Id
@@ -37,7 +42,8 @@ public class Customer implements Serializable {
     private String address;
 
     @Column(nullable = false, updatable = false)
-    @CreatedDate
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime creationDate;
 
     @Column(nullable = false)
@@ -49,10 +55,12 @@ public class Customer implements Serializable {
         this.name = name;
         this.cpf = cpf;
         this.address = address;
+        this.creationDate = this.updateDate = LocalDateTime.now();
     }
 
     public void update(String name, String address) {
         this.name = name;
         this.address = address;
+        this.updateDate = LocalDateTime.now();
     }
 }

@@ -14,7 +14,7 @@ public class CreateCustomerCommand {
     public String id = UUID.randomUUID().toString();
 
     @NotNull
-    @Size(max = 60)
+    @Size(min = 10, max = 60)
     public String name;
 
     @NotNull
