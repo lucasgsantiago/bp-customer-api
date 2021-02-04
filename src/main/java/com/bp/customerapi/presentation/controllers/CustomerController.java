@@ -38,13 +38,13 @@ public class CustomerController implements IClustomerControllerDocs {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    //@Cacheable(RESOURCE)
+    @Cacheable(RESOURCE)
     public PageResponse<CustomerResult> getCustomers(@PageableDefault(value = 20, sort = "name",size = 20,page = 0, direction = Sort.Direction.ASC) Pageable pageable){
         return service.getAllCustomers(pageable);
     }
 
     @GetMapping("/all")
-//    @Cacheable(RESOURCE)
+    @Cacheable(RESOURCE)
     @ResponseStatus(HttpStatus.OK)
     public List<CustomerResult> getCustomerssWithoutPagination(){
         return service.getAllCustomersWithoutPagination();
@@ -58,7 +58,7 @@ public class CustomerController implements IClustomerControllerDocs {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-//    @CacheEvict(value = RESOURCE, allEntries = true)
+    @CacheEvict(value = RESOURCE, allEntries = true)
     public ResponseEntity<?> createCustomer(@Valid @RequestBody CreateCustomerCommand command) throws CustomerAlreadyRegisteredException {
         service.createCustumer(command);
         URI locationUri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/").path(command.id).build().toUri();
@@ -66,7 +66,7 @@ public class CustomerController implements IClustomerControllerDocs {
     }
 
     @PutMapping("/{id}")
-//    @CacheEvict(value = RESOURCE, allEntries = true)
+    @CacheEvict(value = RESOURCE, allEntries = true)
     public ResponseEntity<?> updateCustomer(@PathVariable String id, @Valid @RequestBody UpdateCustomerCommand command) throws BusinessException, ResourceNotFoundException, CustomerNotFoundException {
         command.id = id;
         service.updateCustomer(command);
@@ -77,7 +77,7 @@ public class CustomerController implements IClustomerControllerDocs {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @CacheEvict(value = RESOURCE, allEntries = true)
+    @CacheEvict(value = RESOURCE, allEntries = true)
     public void deleteCustomer(@PathVariable String id) throws CustomerNotFoundException, ResourceNotFoundException {
         service.deleteCustomer(id);
     }
