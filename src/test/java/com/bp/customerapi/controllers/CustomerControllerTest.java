@@ -93,7 +93,7 @@ public class CustomerControllerTest {
     @DisplayName("should return a BadRequest when try create a customer with empty name")
     void createCustumer_ShouldReturnBadRequest_WhenEmptyName() throws Exception {
         // given
-        var command = CustomerCreator.createCustomerToBeSaved();
+        var command = CustomerCreator.createCommandToBeSaved();
         command.name = null;
 
         // then
@@ -107,7 +107,7 @@ public class CustomerControllerTest {
     @DisplayName("should return a BadRequest when try create a customer with empty cpf")
     void createCustumer_ShouldReturnBadRequest_WhenEmptyCpf() throws Exception {
         // given
-        var command = CustomerCreator.createCustomerToBeSaved();
+        var command = CustomerCreator.createCommandToBeSaved();
         command.cpf = null;
 
         // then
@@ -121,7 +121,7 @@ public class CustomerControllerTest {
     @DisplayName("should return a BadRequest when try create a customer with empty address")
     void createCustumer_ShouldReturnBadRequest_WhenEmptyAddress() throws Exception {
         // given
-        var command = CustomerCreator.createCustomerToBeSaved();
+        var command = CustomerCreator.createCommandToBeSaved();
         command.address = null;
 
         // then
@@ -135,7 +135,7 @@ public class CustomerControllerTest {
     @DisplayName("should return a BadRequest when try create a customer with a short name")
     void createCustumer_ShouldReturnBadRequest_WhenShortName() throws Exception {
         // given
-        var command = CustomerCreator.createCustomerToBeSaved();
+        var command = CustomerCreator.createCommandToBeSaved();
         command.name = "Name";
 
         // then
@@ -149,7 +149,7 @@ public class CustomerControllerTest {
     @DisplayName("should return a BadRequest when try create a customer with a short cpf")
     void createCustumer_ShouldReturnBadRequest_WhenShortCpf() throws Exception {
         // given
-        var command = CustomerCreator.createCustomerToBeSaved();
+        var command = CustomerCreator.createCommandToBeSaved();
         command.cpf = "01234";
 
         // then
@@ -162,7 +162,7 @@ public class CustomerControllerTest {
     @DisplayName("should return a BadRequest when try create a customer with a short address")
     void createCustumer_ShouldReturnBadRequest_WhenShortAddress() throws Exception {
         // given
-        var command = CustomerCreator.createCustomerToBeSaved();
+        var command = CustomerCreator.createCommandToBeSaved();
         command.address = "address";
 
         // then
