@@ -10,11 +10,10 @@ import com.bp.customerapi.application.queries.results.CustomerResult;
 import com.bp.customerapi.application.queries.results.PageResponse;
 import com.bp.customerapi.application.queries.results.SuccessResult;
 import com.bp.customerapi.application.services.ICustomerService;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +38,7 @@ public class CustomerController implements IClustomerControllerDocs {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @Cacheable(RESOURCE)
-    public PageResponse<CustomerResult> getCustomers(@PageableDefault(value = 20, sort = "name",size = 20,page = 0, direction = Sort.Direction.ASC) Pageable pageable){
+    public PageResponse<CustomerResult> getCustomers(@ParameterObject Pageable pageable){
         return service.getAllCustomers(pageable);
     }
 

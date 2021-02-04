@@ -8,15 +8,11 @@ import com.bp.customerapi.application.exceptions.CustomerNotFoundException;
 import com.bp.customerapi.application.exceptions.ResourceNotFoundException;
 import com.bp.customerapi.application.queries.results.CustomerResult;
 import com.bp.customerapi.application.queries.results.PageResponse;
-
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +50,7 @@ public interface IClustomerControllerDocs {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Customers list."),
     })
-    PageResponse<CustomerResult> getCustomers(@Parameter(hidden = true) @PageableDefault(value = 20, sort = "name",size = 20,page = 0, direction = Sort.Direction.ASC) Pageable pageable);
+    PageResponse<CustomerResult> getCustomers(Pageable pageable);
 
     @Operation(summary = "Return a Customers list without pagination.")
     @ApiResponses(value = {
