@@ -34,6 +34,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
+@DisplayName("Tests for Customer Controller")
 public class CustomerControllerTest {
 
     private static final String RESOURCE_API_URL_PATH = "/api/v1/customers";

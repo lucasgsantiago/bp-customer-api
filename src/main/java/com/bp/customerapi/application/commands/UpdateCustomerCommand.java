@@ -13,11 +13,11 @@ public class UpdateCustomerCommand {
 
     public String id;
 
-    @NotNull
-    @Size(max = 60)
+    @NotNull(message = "name is required")
+    @Size(min = 10, max = 60)
     public String name;
 
-    @NotNull
+    @NotNull(message = "address is required")
     @Size(min = 10, max = 254)
     public String address;
 

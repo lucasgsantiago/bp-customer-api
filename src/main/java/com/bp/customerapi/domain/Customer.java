@@ -29,15 +29,15 @@ public class Customer implements Serializable {
     @Column(length = 36)
     private String id;
 
-    @NotNull
+    @NotNull(message = "name is required")
     @Column(length = 60)
     private String name;
 
-    @NotNull
+    @NotNull(message = "Cpf is required")
     @Column(length = 11, unique = true)
     private String cpf;
 
-    @NotNull
+    @NotNull(message = "Address is required")
     @Column(length = 254)
     private String address;
 

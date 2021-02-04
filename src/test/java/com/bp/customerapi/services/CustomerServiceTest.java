@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Customer Service Tester")
+@DisplayName("Tests for Customer Service")
 public class CustomerServiceTest {
 
     private CustomerMapper customerMapper = CustomerMapper.INSTANCE;

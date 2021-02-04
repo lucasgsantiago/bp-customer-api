@@ -13,15 +13,15 @@ public class CreateCustomerCommand {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public String id = UUID.randomUUID().toString();
 
-    @NotNull
+    @NotNull(message = "name is required")
     @Size(min = 10, max = 60)
     public String name;
 
-    @NotNull
+    @NotNull(message = "cpf is required")
     @Size(min = 11, max = 11)
     public String cpf;
 
-    @NotNull
+    @NotNull(message = "address is required")
     @Size(min = 10, max = 254)
     public String address;
 
