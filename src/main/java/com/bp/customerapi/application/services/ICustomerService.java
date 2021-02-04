@@ -19,4 +19,5 @@ public interface ICustomerService {
     List<CustomerResult> getAllCustomersWithoutPagination();
     PageResponse<CustomerResult> getAllCustomers(Pageable pageable);
     CustomerResult getCustomerById(String id) throws CustomerNotFoundException;
+    PageResponse<CustomerResult> findCustomerByName(String name, Pageable pageable);
 }

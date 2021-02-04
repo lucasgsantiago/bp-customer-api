@@ -51,4 +51,9 @@ public class CustomerRepository implements ICustomerRespository {
         return mongoJPARespository.findAll();
     }
 
+    @Override
+    public Page<Customer> findCustomerByName(String name, Pageable pageable) {
+        return mongoJPARespository.findByNameContainingIgnoreCase(name,pageable);
+    }
+
 }

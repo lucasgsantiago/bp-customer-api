@@ -52,6 +52,12 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    public PageResponse<CustomerResult> findCustomerByName(String name, Pageable pageable) {
+        var page = respository.findCustomerByName(name,pageable);
+        return new PageResponse<>(page.getSize(),page.getTotalPages(),page.getNumber(),page.getTotalElements(),mapper.toResult(page.getContent()));
+    }
+
+    @Override
     public List<CustomerResult> getAllCustomersWithoutPagination(){
         return mapper.toResult(respository.findAllCustomerWithoutPagintation());
     }

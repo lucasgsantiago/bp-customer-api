@@ -55,6 +55,12 @@ public class CustomerController implements IClustomerControllerDocs {
         return service.getCustomerById(id);
     }
 
+    @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public PageResponse<CustomerResult> findCustomerByName(@RequestParam("name") String name,@ParameterObject Pageable pageable) {
+        return this.service.findCustomerByName(name,pageable);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @CacheEvict(value = RESOURCE, allEntries = true)

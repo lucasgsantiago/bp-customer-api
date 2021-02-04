@@ -16,3 +16,12 @@ spring:
 jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui-custom.html
+  version: 1.0.0

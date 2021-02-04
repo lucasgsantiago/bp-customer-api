@@ -14,4 +14,5 @@ public interface ICustomerRespository {
     Optional<Customer> findCustomerById(String id);
     Page<Customer> findAllCustomer(Pageable pageable);
     List<Customer> findAllCustomerWithoutPagintation();
+    Page<Customer> findCustomerByName(String name, Pageable pageable);
 }
