@@ -1,18 +1,17 @@
 package com.bp.customerapi.application.services;
 
+import com.bp.customerapi.application.commands.CreateCustomerCommand;
 import com.bp.customerapi.application.commands.UpdateCustomerCommand;
 import com.bp.customerapi.application.exceptions.BusinessException;
 import com.bp.customerapi.application.exceptions.CustomerAlreadyRegisteredException;
-import com.bp.customerapi.application.commands.CreateCustomerCommand;
 import com.bp.customerapi.application.exceptions.CustomerNotFoundException;
 import com.bp.customerapi.application.queries.results.CustomerResult;
 import com.bp.customerapi.application.queries.results.PageResponse;
 import com.bp.customerapi.domain.Customer;
 import com.bp.customerapi.domain.ICustomerRespository;
 import com.bp.customerapi.infrastructure.mappers.CustomerMapper;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.internal.util.StringHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class CustomerService implements ICustomerService {
 
     private final ICustomerRespository respository;

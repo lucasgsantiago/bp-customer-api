@@ -18,17 +18,17 @@ public class CustomerRepository implements ICustomerRespository {
 
     @Override
     public void save(Customer customer) {
-
+        mongoJPARespository.save(customer);
     }
 
     @Override
     public void update(Customer customer) {
-
+        mongoJPARespository.save(customer);
     }
 
     @Override
     public void delete(Customer customer) {
-
+        mongoJPARespository.delete(customer);
     }
 
     @Override

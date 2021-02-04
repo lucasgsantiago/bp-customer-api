@@ -38,7 +38,7 @@ public class Customer implements Serializable {
 
     @Column(nullable = false, updatable = false)
     @CreatedDate
-    private LocalDateTime createDate;
+    private LocalDateTime creationDate;
 
     @Column(nullable = false)
     @LastModifiedDate
