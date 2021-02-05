@@ -85,6 +85,6 @@ public class CustomerService implements ICustomerService {
     }
 
     private void validateCpf(String cpf){
-        if(CpfValidatorService.isValid(cpf)) throw new InvalidCPFException();
+        if(!CpfValidatorService.isValid(cpf)) throw new InvalidCPFException();
     }
 }

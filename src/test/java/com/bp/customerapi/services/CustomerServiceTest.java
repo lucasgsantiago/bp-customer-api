@@ -1,13 +1,14 @@
 package com.bp.customerapi.services;
 
-import com.bp.customerapi.application.commands.customer.CreateCustomerCommand;
 import com.bp.customerapi.application.commands.customer.UpdateCustomerCommand;
 import com.bp.customerapi.application.exceptions.CustomerAlreadyRegisteredException;
 import com.bp.customerapi.application.exceptions.CustomerNotFoundException;
+import com.bp.customerapi.application.exceptions.InvalidCPFException;
 import com.bp.customerapi.application.services.CustomerService;
 import com.bp.customerapi.domain.customer.Customer;
 import com.bp.customerapi.infrastructure.database.repositories.CustomerRepository;
 import com.bp.customerapi.infrastructure.mappers.CustomerMapper;
+import com.bp.customerapi.utils.CustomerCreator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,10 +36,11 @@ public class CustomerServiceTest {
     private CustomerService customerService;
 
     @Test
-    @DisplayName("should create customer successfully")
-    void createCustomer_Success() {
-
-        var command = new CreateCustomerCommand("cliente","12345678901","rua tal");
+    @DisplayName("should create customer successfully when formatted valid cpf is given")
+    void createCustomer_WithFormattedValidCpf_Success() {
+        String formattedValidCpf = "109.948.220-81";
+        var command = CustomerCreator.createCommandToBeSaved();
+        command.cpf = formattedValidCpf;
 
         doNothing().when(clienteRepository).save(any());
         when(clienteRepository.findFirstCustomerByCPF(any())).thenReturn(Optional.empty());
@@ -52,10 +54,35 @@ public class CustomerServiceTest {
     }
 
     @Test
+    @DisplayName("should create customer successfully when unformatted valid cpf is given")
+    void createCustomer_WithUnformattedValidCpf_Success() {
+
+        var command = CustomerCreator.createCommandToBeSaved();
+
+        doNothing().when(clienteRepository).save(any());
+        when(clienteRepository.findFirstCustomerByCPF(any())).thenReturn(Optional.empty());
+
+        try {
+            customerService.createCustumer(command);
+            assertTrue(true);
+        }catch (Exception e){
+            fail();
+        }
+    }
+
+    @Test
+    @DisplayName("should thrown InvalidCPFException when try register a customer with invalid cpf")
+    void createCustomer_ShouldThrownInvalidCPFException() {
+        var command = CustomerCreator.createCommandToBeSaved();
+        command.cpf = "1234567891";
+        assertThrows(InvalidCPFException.class, () -> customerService.createCustumer(command));
+    }
+
+    @Test
     @DisplayName("should thrown CustomerAlreadyRegisteredException when try register a customer with same cpf")
     void createCustomer_ShouldThrownCustomerAlreadyRegisteredException() {
 
-        var command = new CreateCustomerCommand("cliente","12345678901","rua tal");
+        var command = CustomerCreator.createCommandToBeSaved();
         var customer = customerMapper.toDomain(command);
 
         when(clienteRepository.findFirstCustomerByCPF(any())).thenReturn(Optional.of(customer));
@@ -67,12 +94,7 @@ public class CustomerServiceTest {
     @DisplayName("should delete customer successfully")
     void deleteCustomer_Success() {
 
-        var customer = Customer.builder()
-                .id(UUID.randomUUID().toString())
-                .cpf("teste@gmail.com")
-                .name("customer")
-                .creationDate(LocalDateTime.now())
-                .build();
+        var customer = CustomerCreator.createValidCustomer();
 
         doNothing().when(clienteRepository).delete(any());
         when(clienteRepository.findCustomerById(any())).thenReturn(Optional.of(customer));
@@ -97,15 +119,9 @@ public class CustomerServiceTest {
     @Test
     @DisplayName("should update customer successfully")
     void updateCustomer_Sucesso() {
-        var customer = Customer.builder()
-                .id(UUID.randomUUID().toString())
-                .cpf("01234567890")
-                .name("any customer")
-                .address("any Address")
-                .creationDate(LocalDateTime.now())
-                .build();
+        var customer = CustomerCreator.createValidCustomer();
 
-        var command = new UpdateCustomerCommand(customer.getId(),"another name"," another address");
+        var command = new UpdateCustomerCommand(customer.getId(),"another name","another address");
 
         when(clienteRepository.findCustomerById(any())).thenReturn(Optional.of(customer));
         doNothing().when(clienteRepository).save(any());

@@ -78,7 +78,7 @@ public class CustomerControllerTest {
     @DisplayName("should create customer successfully")
     void createCustomer_Success() throws Exception {
         // given
-        var command = new CreateCustomerCommand("any customer","12345678901","any address");
+        var command = CustomerCreator.createCommandToBeSaved();
 
         // when
         doNothing().when(customerService).createCustumer(any());

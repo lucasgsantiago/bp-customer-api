@@ -1,14 +1,10 @@
 package com.bp.customerapi.domain;
 
-import com.bp.customerapi.domain.customer.Customer;
-import org.junit.jupiter.api.BeforeEach;
+import com.bp.customerapi.utils.CustomerCreator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,31 +12,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Tests for Customer Model")
 public class CustomerTest {
 
-    private Customer customer;
-
-    @BeforeEach
-    void setUp() {
-        this.customer = Customer.builder()
-                .id(UUID.randomUUID().toString())
-                .cpf("01234567890")
-                .name("cliente")
-                .address("endereço")
-                .creationDate(LocalDateTime.now())
-                .build();
-    }
-
     @Test
-    void update(){
+    @DisplayName("Should update customer")
+    void updateCustomer(){
+        var customer = CustomerCreator.createValidCustomer();
         String expectedName = "edited name";
         String expecteAddress = "edited address";
 
-        this.customer.update(expectedName,expecteAddress);
+        customer.update(expectedName,expecteAddress);
 
-        assertThat(this.customer).isNotNull();
-        assertThat(this.customer.getName()).isEqualTo(expectedName);
-        assertThat(this.customer.getAddress()).isEqualTo(expecteAddress);
-        assertThat(this.customer.getUpdateDate()).isNotNull();
-        assertThat(this.customer.getUpdateDate()).isAfter(this.customer.getCreationDate());
+        assertThat(customer).isNotNull();
+        assertThat(customer.getName()).isEqualTo(expectedName);
+        assertThat(customer.getAddress()).isEqualTo(expecteAddress);
+        assertThat(customer.getUpdateDate()).isNotNull();
+        assertThat(customer.getUpdateDate()).isAfter(customer.getCreationDate());
     }
 
 }

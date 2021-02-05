@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +24,7 @@ class CustomerMongoJPARespositoryTest {
     @Test
     @DisplayName("Save customer when Successful")
     void save_Success() {
-        var customerToBeSaved = CustomerCreator.createCustomerToBeSaved();
+        var customerToBeSaved = CustomerCreator.createValidCustomer();
 
         var customerSaved = this.respository.save(customerToBeSaved);
 
@@ -37,7 +38,7 @@ class CustomerMongoJPARespositoryTest {
     @Test
     @DisplayName("Save updates customer when Successful")
     void updates_Success(){
-        var customerToBeSaved = CustomerCreator.createCustomerToBeSaved();
+        var customerToBeSaved = CustomerCreator.createValidCustomer();
 
         var customerSaved = this.respository.save(customerToBeSaved);
 
@@ -55,7 +56,7 @@ class CustomerMongoJPARespositoryTest {
     @Test
     @DisplayName("Delete removes customer when Successful")
     void delete_Success(){
-        Customer customerToBeSaved = CustomerCreator.createCustomerToBeSaved();
+        Customer customerToBeSaved = CustomerCreator.createValidCustomer();
 
         Customer customerSaved = this.respository.save(customerToBeSaved);
 
@@ -85,7 +86,8 @@ class CustomerMongoJPARespositoryTest {
     @Test
     @DisplayName("Find By Name returns empty list when no customer is found")
     void findByName_ReturnsEmptyList_WhenCustomerIsNotFound(){
-        Page<Customer> customers = this.respository.findByNameContainingIgnoreCase("name",PageRequest.of(1,1 ));
+        String aloatoryName = UUID.randomUUID().toString();
+        Page<Customer> customers = this.respository.findByNameContainingIgnoreCase(aloatoryName,PageRequest.of(1,1 ));
 
         assertThat(customers).isEmpty();
     }
