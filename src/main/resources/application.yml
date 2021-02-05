@@ -9,7 +9,8 @@ spring:
       ddl-auto: create-drop
   data:
     mongodb:
-      uri: mongodb://db-mongo:27017/customersdb
+#      uri: mongodb://db-mongo:27017/customersdb
+      uri: mongodb://localhost:27017/customersdb
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
@@ -25,3 +26,10 @@ springdoc:
     enabled: true
     path: /swagger-ui-custom.html
   version: 1.0.0
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG

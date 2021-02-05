@@ -1,4 +1,4 @@
-package com.bp.customerapi.domain;
+package com.bp.customerapi.domain.customer;
 
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.bp.customerapi.controllers;
 
-import com.bp.customerapi.application.commands.CreateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.CreateCustomerCommand;
 import com.bp.customerapi.application.queries.results.CustomerResult;
 import com.bp.customerapi.application.queries.results.PageResponse;
 import com.bp.customerapi.application.services.CustomerService;

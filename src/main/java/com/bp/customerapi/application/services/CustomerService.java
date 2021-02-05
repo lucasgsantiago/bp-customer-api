@@ -1,14 +1,14 @@
 package com.bp.customerapi.application.services;
 
-import com.bp.customerapi.application.commands.CreateCustomerCommand;
-import com.bp.customerapi.application.commands.UpdateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.CreateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.UpdateCustomerCommand;
 import com.bp.customerapi.application.exceptions.BusinessException;
 import com.bp.customerapi.application.exceptions.CustomerAlreadyRegisteredException;
 import com.bp.customerapi.application.exceptions.CustomerNotFoundException;
 import com.bp.customerapi.application.queries.results.CustomerResult;
 import com.bp.customerapi.application.queries.results.PageResponse;
-import com.bp.customerapi.domain.Customer;
-import com.bp.customerapi.domain.ICustomerRespository;
+import com.bp.customerapi.domain.customer.Customer;
+import com.bp.customerapi.domain.customer.ICustomerRespository;
 import com.bp.customerapi.infrastructure.mappers.CustomerMapper;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.internal.util.StringHelper;

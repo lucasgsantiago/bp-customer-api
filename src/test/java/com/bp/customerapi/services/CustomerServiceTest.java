@@ -1,12 +1,11 @@
 package com.bp.customerapi.services;
 
-import com.bp.customerapi.application.commands.CreateCustomerCommand;
-import com.bp.customerapi.application.commands.UpdateCustomerCommand;
-import com.bp.customerapi.application.exceptions.BusinessException;
+import com.bp.customerapi.application.commands.customer.CreateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.UpdateCustomerCommand;
 import com.bp.customerapi.application.exceptions.CustomerAlreadyRegisteredException;
 import com.bp.customerapi.application.exceptions.CustomerNotFoundException;
 import com.bp.customerapi.application.services.CustomerService;
-import com.bp.customerapi.domain.Customer;
+import com.bp.customerapi.domain.customer.Customer;
 import com.bp.customerapi.infrastructure.database.repositories.CustomerRepository;
 import com.bp.customerapi.infrastructure.mappers.CustomerMapper;
 import org.junit.jupiter.api.DisplayName;

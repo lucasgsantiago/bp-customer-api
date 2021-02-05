@@ -1,7 +1,7 @@
 package com.bp.customerapi.application.services;
 
-import com.bp.customerapi.application.commands.CreateCustomerCommand;
-import com.bp.customerapi.application.commands.UpdateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.CreateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.UpdateCustomerCommand;
 import com.bp.customerapi.application.exceptions.BusinessException;
 import com.bp.customerapi.application.exceptions.CustomerAlreadyRegisteredException;
 import com.bp.customerapi.application.exceptions.CustomerNotFoundException;

@@ -1,7 +1,7 @@
 package com.bp.customerapi.presentation.controllers;
 
-import com.bp.customerapi.application.commands.CreateCustomerCommand;
-import com.bp.customerapi.application.commands.UpdateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.CreateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.UpdateCustomerCommand;
 import com.bp.customerapi.application.exceptions.BusinessException;
 import com.bp.customerapi.application.exceptions.CustomerAlreadyRegisteredException;
 import com.bp.customerapi.application.exceptions.CustomerNotFoundException;
@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -38,6 +39,7 @@ public class CustomerController implements IClustomerControllerDocs {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @Cacheable(RESOURCE)
+    @PreAuthorize("hasRole('USER')")
     public PageResponse<CustomerResult> getCustomers(@ParameterObject Pageable pageable){
         return service.getAllCustomers(pageable);
     }
@@ -45,18 +47,21 @@ public class CustomerController implements IClustomerControllerDocs {
     @GetMapping("/all")
     @Cacheable(RESOURCE)
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('USER')")
     public List<CustomerResult> getCustomerssWithoutPagination(){
         return service.getAllCustomersWithoutPagination();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('USER')")
     public CustomerResult getCustomerById(@PathVariable String id) throws CustomerNotFoundException {
         return service.getCustomerById(id);
     }
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('USER')")
     public PageResponse<CustomerResult> findCustomerByName(@RequestParam("name") String name,@ParameterObject Pageable pageable) {
         return this.service.findCustomerByName(name,pageable);
     }
@@ -64,6 +69,7 @@ public class CustomerController implements IClustomerControllerDocs {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @CacheEvict(value = RESOURCE, allEntries = true)
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SuccessResult> createCustomer(@Valid @RequestBody CreateCustomerCommand command) throws CustomerAlreadyRegisteredException {
         service.createCustumer(command);
         URI locationUri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/").path(command.id).build().toUri();
@@ -72,6 +78,7 @@ public class CustomerController implements IClustomerControllerDocs {
 
     @PutMapping("/{id}")
     @CacheEvict(value = RESOURCE, allEntries = true)
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateCustomer(@PathVariable String id, @Valid @RequestBody UpdateCustomerCommand command) throws BusinessException, ResourceNotFoundException, CustomerNotFoundException {
         command.id = id;
         service.updateCustomer(command);
@@ -83,6 +90,7 @@ public class CustomerController implements IClustomerControllerDocs {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CacheEvict(value = RESOURCE, allEntries = true)
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteCustomer(@PathVariable String id) throws CustomerNotFoundException, ResourceNotFoundException {
         service.deleteCustomer(id);
     }

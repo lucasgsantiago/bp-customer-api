@@ -1,5 +1,6 @@
 package com.bp.customerapi.domain;
 
+import com.bp.customerapi.domain.customer.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package com.bp.customerapi.infrastructure.database.repositories;
 
-import com.bp.customerapi.domain.Customer;
-import com.bp.customerapi.domain.ICustomerRespository;
+import com.bp.customerapi.domain.customer.Customer;
+import com.bp.customerapi.domain.customer.ICustomerRespository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,46 +14,46 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerRepository implements ICustomerRespository {
 
-    private final MongoJPARespository mongoJPARespository;
+    private final CustomerMongoJPARespository customerMongoJPARespository;
 
     @Override
     public void save(Customer customer) {
-        mongoJPARespository.save(customer);
+        customerMongoJPARespository.save(customer);
     }
 
     @Override
     public void update(Customer customer) {
-        mongoJPARespository.save(customer);
+        customerMongoJPARespository.save(customer);
     }
 
     @Override
     public void delete(Customer customer) {
-        mongoJPARespository.delete(customer);
+        customerMongoJPARespository.delete(customer);
     }
 
     @Override
     public Optional<Customer> findFirstCustomerByCPF(String cpf) {
-        return mongoJPARespository.findFirstByCpf(cpf);
+        return customerMongoJPARespository.findFirstByCpf(cpf);
     }
 
     @Override
     public Optional<Customer> findCustomerById(String id) {
-        return mongoJPARespository.findById(id);
+        return customerMongoJPARespository.findById(id);
     }
 
     @Override
     public Page<Customer> findAllCustomer(Pageable pageable) {
-        return mongoJPARespository.findAll(pageable);
+        return customerMongoJPARespository.findAll(pageable);
     }
 
     @Override
     public List<Customer> findAllCustomerWithoutPagintation() {
-        return mongoJPARespository.findAll();
+        return customerMongoJPARespository.findAll();
     }
 
     @Override
     public Page<Customer> findCustomerByName(String name, Pageable pageable) {
-        return mongoJPARespository.findByNameContainingIgnoreCase(name,pageable);
+        return customerMongoJPARespository.findByNameContainingIgnoreCase(name,pageable);
     }
 
 }

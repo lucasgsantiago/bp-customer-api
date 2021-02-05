@@ -20,4 +20,9 @@ public class SuccessResult {
         this.correlationId = correlationId;
         this.href = uri;
     }
+
+    public SuccessResult(String correlationId, String message) {
+        this.correlationId = correlationId;
+        this.message = message;
+    }
 }

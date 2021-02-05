@@ -1,4 +1,4 @@
-package com.bp.customerapi.application.commands;
+package com.bp.customerapi.application.commands.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

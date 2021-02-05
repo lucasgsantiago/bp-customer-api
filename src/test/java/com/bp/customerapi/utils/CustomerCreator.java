@@ -1,8 +1,8 @@
 package com.bp.customerapi.utils;
 
-import com.bp.customerapi.application.commands.CreateCustomerCommand;
+import com.bp.customerapi.application.commands.customer.CreateCustomerCommand;
 import com.bp.customerapi.application.queries.results.CustomerResult;
-import com.bp.customerapi.domain.Customer;
+import com.bp.customerapi.domain.customer.Customer;
 
 import java.time.LocalDateTime;
 

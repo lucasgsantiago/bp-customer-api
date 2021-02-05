@@ -1,4 +1,4 @@
-package com.bp.customerapi.application.commands;
+package com.bp.customerapi.application.commands.customer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NoArgsConstructor;

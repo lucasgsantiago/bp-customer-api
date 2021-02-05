@@ -1,8 +1,7 @@
 package com.bp.customerapi.infrastructure.database.repositories;
 
-import com.bp.customerapi.domain.Customer;
+import com.bp.customerapi.domain.customer.Customer;
 import com.bp.customerapi.utils.CustomerCreator;
-import org.junit.Ignore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
 @DisplayName("Tests for Customer Repository")
-class MongoJPARespositoryTest {
+class CustomerMongoJPARespositoryTest {
 
     @Autowired
-    private MongoJPARespository respository;
+    private CustomerMongoJPARespository respository;
     
     @Test
     @DisplayName("Save customer when Successful")
