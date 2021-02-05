@@ -1,5 +1,6 @@
 package com.bp.customerapi.application.commands.customer;
 
+import com.bp.customerapi.infrastructure.annotations.ValidCPF;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +19,7 @@ public class CreateCustomerCommand {
     public String name;
 
     @NotNull(message = "cpf is required")
-    @Size(min = 11, max = 11)
+    @ValidCPF
     public String cpf;
 
     @NotNull(message = "address is required")

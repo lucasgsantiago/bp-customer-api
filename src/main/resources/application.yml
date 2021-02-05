@@ -33,3 +33,7 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+
+validation:
+  business:
+    valid_cpf: Invalid CPF

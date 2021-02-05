@@ -1,6 +1,7 @@
 package com.bp.customerapi.infrastructure.handlers;
 
 import com.bp.customerapi.application.exceptions.BusinessException;
+import com.bp.customerapi.application.exceptions.InvalidCPFException;
 import com.bp.customerapi.application.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<?> businessExceptionHandler(Exception ex, WebRequest request){
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidCPFException.class)
+    public ResponseEntity<?> resourceNotFoundException(InvalidCPFException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }

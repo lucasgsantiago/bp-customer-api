@@ -13,11 +13,11 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ICustomerService {
-    void createCustumer(CreateCustomerCommand command) throws CustomerAlreadyRegisteredException;
-    void updateCustomer(UpdateCustomerCommand command) throws BusinessException, ResourceNotFoundException, CustomerNotFoundException;
-    void deleteCustomer(String id) throws ResourceNotFoundException, CustomerNotFoundException;
+    void createCustumer(CreateCustomerCommand command);
+    void updateCustomer(UpdateCustomerCommand command);
+    void deleteCustomer(String id);
     List<CustomerResult> getAllCustomersWithoutPagination();
     PageResponse<CustomerResult> getAllCustomers(Pageable pageable);
-    CustomerResult getCustomerById(String id) throws CustomerNotFoundException;
+    CustomerResult getCustomerById(String id);
     PageResponse<CustomerResult> findCustomerByName(String name, Pageable pageable);
 }
