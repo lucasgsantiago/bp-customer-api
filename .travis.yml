@@ -1,0 +1,21 @@
+language: java
+jdk:
+  - oraclejdk11
+before_intall:
+  - sudo apt-get update
+  - echo "Let's tart Maven Package!"
+  - mvn clean package
+  - echo "Let's start Docker"
+script:
+  - docker-compose build
+before_deploy:
+  echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+deploy:
+  provider: script
+  script:
+    docker tag customer-api:latest lucasgs/customer-api:latest;
+    docker push lucasgs/customer-api:latest;
+  on:
+    branch: main
+notifications:
+  email: false

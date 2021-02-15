@@ -2,13 +2,13 @@ version: "3.4"
 services:
 
   db-mongo:
-    image: mongo:4.0
+    image: mongo:4.2.12-bionic
     container_name: "db-mongo"
     ports:
       - 27017:27017
     networks:
       - backend-network
-    command: --smallfiles
+#    command: --smallfiles
 
   customer-api:
     image: customer-api
