@@ -1,10 +1,15 @@
 package com.bp.customerapi.domain.customer;
 
+import com.bp.customerapi.application.exceptions.InvalidCPFException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.InputMismatchException;
 
 public abstract class CpfValidatorService {
+    public static void validate(String cpf){
+        if(!isValid(cpf)) throw new InvalidCPFException();
+    }
+
     public static boolean isValid(String originalCPF) {
         if(StringUtils.isEmpty(originalCPF)) return false;
         final String CPF = originalCPF.replaceAll("\\D","");

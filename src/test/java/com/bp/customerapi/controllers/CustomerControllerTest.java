@@ -1,9 +1,8 @@
 package com.bp.customerapi.controllers;
 
-import com.bp.customerapi.application.commands.customer.CreateCustomerCommand;
 import com.bp.customerapi.application.queries.results.CustomerResult;
 import com.bp.customerapi.application.queries.results.PageResponse;
-import com.bp.customerapi.application.services.CustomerService;
+import com.bp.customerapi.application.services.customer.*;
 import com.bp.customerapi.presentation.controllers.CustomerController;
 import com.bp.customerapi.utils.CustomerCreator;
 import com.bp.customerapi.utils.JsonConvertionUtils;
@@ -43,6 +42,21 @@ public class CustomerControllerTest {
 
     @Mock
     private CustomerService customerService;
+    @Mock
+    private CreateCustomerService createCustomerService;
+    @Mock
+    private UpdateCustomerService updateCustomerService;
+    @Mock
+    private DeleteCustomerService deleteCustomerService;
+    @Mock
+    private FindCustomerByNameService findCustomerByNameService;
+    @Mock
+    private GetCustomerByIdService getCustomerByIdService;
+    @Mock
+    private GetAllCustomerWithoutPaginationService getAllCustomerWithoutPaginationService;
+    @Mock
+    private GetAllCustomersService getAllCustomersService;
+
 
     @InjectMocks
     private CustomerController customerController;
@@ -61,7 +75,7 @@ public class CustomerControllerTest {
         var expecteCustomer = CustomerCreator.createCustomerToBeReturned();
         PageResponse<CustomerResult> customerPage = new PageResponse<>(1,1,1,1,
                 Stream.of(expecteCustomer).collect(Collectors.toList()));
-        BDDMockito.when(customerService.getAllCustomers(ArgumentMatchers.any())).thenReturn(customerPage);
+        BDDMockito.when(getAllCustomersService.execute(ArgumentMatchers.any())).thenReturn(customerPage);
 
         PageResponse<CustomerResult> receivedPage = customerController.getCustomers(null);
 
@@ -81,7 +95,7 @@ public class CustomerControllerTest {
         var command = CustomerCreator.createCommandToBeSaved();
 
         // when
-        doNothing().when(customerService).createCustumer(any());
+        doNothing().when(createCustomerService).execute(any());
 
         // then
         mockMvc.perform(post(RESOURCE_API_URL_PATH)
@@ -180,7 +194,7 @@ public class CustomerControllerTest {
         var customerId = UUID.randomUUID().toString();
 
         //when
-        doNothing().when(customerService).deleteCustomer(any());
+        doNothing().when(deleteCustomerService).execute(any());
 
         // then
         mockMvc.perform(delete(RESOURCE_API_URL_PATH + "/" + customerId)

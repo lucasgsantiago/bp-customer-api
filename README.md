@@ -1,5 +1,5 @@
 # bp-customer-api
-Customers API to Brasilprev Application
+Customers API 
 
 Url AWS: http://13.59.174.47:8080/
 
