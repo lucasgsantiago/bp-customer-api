@@ -41,19 +41,9 @@ public class CustomerControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private CustomerService customerService;
-    @Mock
     private CreateCustomerService createCustomerService;
     @Mock
-    private UpdateCustomerService updateCustomerService;
-    @Mock
     private DeleteCustomerService deleteCustomerService;
-    @Mock
-    private FindCustomerByNameService findCustomerByNameService;
-    @Mock
-    private GetCustomerByIdService getCustomerByIdService;
-    @Mock
-    private GetAllCustomerWithoutPaginationService getAllCustomerWithoutPaginationService;
     @Mock
     private GetAllCustomersService getAllCustomersService;
 
@@ -201,6 +191,5 @@ public class CustomerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
-
 
 }

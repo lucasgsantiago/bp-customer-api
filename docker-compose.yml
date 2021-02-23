@@ -27,7 +27,7 @@ services:
       - db-mongo
     networks:
       - backend-network
-      
+
 networks:
   backend-network:
     driver: bridge
